@@ -14,8 +14,11 @@ Go code!
 */
 
 const app = require("./server.js");
+const projectRouter = require("./routes/projectRoutes");
 
 const port = process.env.PORT || 8000;
+
+app.use("/api/projects", projectRouter);
 
 /**
  * All wrong routes
