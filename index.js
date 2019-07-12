@@ -15,10 +15,12 @@ Go code!
 
 const app = require("./server.js");
 const projectRouter = require("./routes/projectRoutes");
+const actionRouter = require("./routes/actionRoutes");
 
 const port = process.env.PORT || 8000;
 
 app.use("/api/projects", projectRouter);
+app.use("/api/actions", actionRouter);
 
 /**
  * All wrong routes
