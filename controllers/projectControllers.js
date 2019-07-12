@@ -87,10 +87,33 @@ const deleteProject = async (req, res) => {
   }
 };
 
+const getActionByProject = async (req, res) => {
+  const id = req.params.id;
+  try {
+    const projectActions = await ProjectDb.getProjectActions(id);
+    if (Object.keys(projectActions).length !== 0) {
+      return res.status(200).json({
+        status: 200,
+        posts: projectActions
+      });
+    }
+    return res.status(404).json({
+      status: 404,
+      message: "Project has no actions yet"
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: 500,
+      error: "There was an error retrieving project from database"
+    });
+  }
+};
+
 module.exports = {
   getProjects,
   getProjectById,
   createProject,
   updateProject,
-  deleteProject
+  deleteProject,
+  getActionByProject
 };

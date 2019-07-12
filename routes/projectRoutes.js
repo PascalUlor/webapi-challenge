@@ -30,4 +30,9 @@ router.delete(
   projectControllers.deleteProject
 );
 
+router.get(
+  "/:id/action",
+  ProjectHelper.validateProjectId,
+  projectControllers.getActionByProject
+);
 module.exports = router;
