@@ -44,8 +44,37 @@ const createProject = async (req, res) => {
   }
 };
 
+const updateProject = async (req, res) => {
+  try {
+    const { name, description } = req.body;
+
+    if (req.body.name && req.body.description) {
+      if (req.body.name !== "" && req.body.description !== "") {
+        const projectUpdate = await ProjectDb.update(req.params.id, {
+          name,
+          description
+        });
+        return res.status(200).json({
+          status: 200,
+          data: projectUpdate
+        });
+      }
+      return res.status(400).json({
+        status: 400,
+        errorMessage: "Please provide project deatals."
+      });
+    }
+  } catch (err) {
+    return res.status(400).json({
+      status: 500,
+      error: "The user information could not be modified."
+    });
+  }
+};
+
 module.exports = {
   getProjects,
   getProjectById,
-  createProject
+  createProject,
+  updateProject
 };

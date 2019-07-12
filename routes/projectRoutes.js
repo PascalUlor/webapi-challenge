@@ -12,6 +12,11 @@ router.get(
   projectControllers.getProjectById
 );
 
+router.put(
+  "/:id",
+  ProjectHelper.validateProjectId,
+  projectControllers.updateProject
+);
 router.post(
   "/",
   ProjectHelper.validateProject,
