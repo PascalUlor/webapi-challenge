@@ -21,6 +21,18 @@ const getAllActions = async (req, res) => {
   }
 };
 
+const getById = (req, res, statusCode) => {
+  return res.status(200).json({
+    status: statusCode,
+    data: req.action
+  });
+};
+
+const getActionById = async (req, res) => {
+  return getById(req, res, 200);
+};
+
 module.exports = {
-  getAllActions
+  getAllActions,
+  getActionById
 };
