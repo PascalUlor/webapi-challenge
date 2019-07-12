@@ -2,10 +2,11 @@ const Actions = require("../data/helpers/actionModel");
 
 async function validateActionId(req, res, next) {
   const newAct = req.newAction ? req.newAction.id : "";
-  const id = newAct || req.params.id;
+  const paramsId = req.params.id ? req.params.id : "";
+  const id = newAct || paramsId;
   if (id !== undefined && id !== "" && Number(id)) {
     action = await Actions.get(id);
-    if (action) {
+    if (Object.keys(action).length !== 0 || action !== undefined) {
       req.action = action;
       next();
     } else {
