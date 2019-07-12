@@ -72,9 +72,25 @@ const updateProject = async (req, res) => {
   }
 };
 
+const deleteProject = async (req, res) => {
+  try {
+    const removeProject = await ProjectDb.remove(req.params.id);
+    return res.status(200).json({
+      status: 200,
+      data: removeProject
+    });
+  } catch (err) {
+    return res.status(400).json({
+      status: 500,
+      error: "The project could not be removed"
+    });
+  }
+};
+
 module.exports = {
   getProjects,
   getProjectById,
   createProject,
-  updateProject
+  updateProject,
+  deleteProject
 };
