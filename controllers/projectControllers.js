@@ -33,7 +33,19 @@ const getProjectById = async (req, res) => {
   return getById(req, res, 200);
 };
 
+const createProject = async (req, res) => {
+  try {
+    return getById(req, res, 201);
+  } catch (error) {
+    res.status(500).json({
+      status: 500,
+      error: "There was an error while saving the post to the database"
+    });
+  }
+};
+
 module.exports = {
   getProjects,
-  getProjectById
+  getProjectById,
+  createProject
 };

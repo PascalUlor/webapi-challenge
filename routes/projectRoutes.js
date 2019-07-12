@@ -12,4 +12,11 @@ router.get(
   projectControllers.getProjectById
 );
 
+router.post(
+  "/",
+  ProjectHelper.validateProject,
+  ProjectHelper.validateProjectId,
+  projectControllers.createProject
+);
+
 module.exports = router;
