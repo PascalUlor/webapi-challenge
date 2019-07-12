@@ -71,9 +71,25 @@ const updateAction = async (req, res) => {
   }
 };
 
+const deleteAction = async (req, res) => {
+  try {
+    const removedAction = await ActionDb.remove(req.params.id);
+    return res.status(200).json({
+      status: 200,
+      data: removedAction
+    });
+  } catch (err) {
+    return res.status(400).json({
+      status: 500,
+      error: "The action could not be removed"
+    });
+  }
+};
+
 module.exports = {
   getAllActions,
   getActionById,
   createAction,
-  updateAction
+  updateAction,
+  deleteAction
 };

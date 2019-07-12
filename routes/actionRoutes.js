@@ -24,4 +24,10 @@ router.put(
   ActionControllers.updateAction
 );
 
+router.delete(
+  "/:id",
+  ActionHelper.validateActionId,
+  ActionControllers.deleteAction
+);
+
 module.exports = router;
