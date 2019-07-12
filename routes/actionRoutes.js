@@ -11,4 +11,11 @@ router.get(
   ActionControllers.getActionById
 );
 
+router.post(
+  "/:id/project",
+  ActionHelper.validateAction,
+  ActionHelper.validateActionId,
+  ActionControllers.createAction
+);
+
 module.exports = router;
