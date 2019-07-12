@@ -12,3 +12,21 @@ I need this code, just don't know where, perhaps should make some middleware, do
 
 Go code!
 */
+
+const app = require("./server.js");
+
+const port = process.env.PORT || 8000;
+
+/**
+ * All wrong routes
+ */
+app.get("*", (req, res) => {
+  res.status(404).json({
+    status: 404,
+    message: "Wrong route"
+  });
+});
+
+app.listen(port, () => {
+  console.log(`App listening on port ${port}`);
+});
