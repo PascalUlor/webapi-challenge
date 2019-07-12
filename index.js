@@ -12,3 +12,36 @@ I need this code, just don't know where, perhaps should make some middleware, do
 
 Go code!
 */
+const path = require("path");
+const app = require("./server.js");
+const projectRouter = require("./routes/projectRoutes");
+const actionRouter = require("./routes/actionRoutes");
+
+const port = process.env.PORT || 8000;
+
+app.use("/api/projects", projectRouter);
+app.use("/api/actions", actionRouter);
+
+// Serve static assets if in production
+if (process.env.NODE_ENV === "production") {
+  // Set static folder
+  app.use(express.static("client/build"));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
+
+/**
+ * All wrong routes
+ */
+app.get("*", (req, res) => {
+  res.status(404).json({
+    status: 404,
+    message: "Wrong route"
+  });
+});
+
+app.listen(port, () => {
+  console.log(`App listening on port ${port}`);
+});
