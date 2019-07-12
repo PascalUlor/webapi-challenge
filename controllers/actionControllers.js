@@ -43,8 +43,37 @@ const createAction = async (req, res) => {
   }
 };
 
+const updateAction = async (req, res) => {
+  try {
+    const { notes, description } = req.body;
+    const actionId = req.params.id;
+    if (req.body.notes && req.body.description) {
+      if (req.body.notes !== "" && req.body.description !== "") {
+        const actionUpdate = await ActionDb.update(actionId, {
+          notes,
+          description
+        });
+        return res.status(200).json({
+          status: 200,
+          data: actionUpdate
+        });
+      }
+      return res.status(400).json({
+        status: 400,
+        errorMessage: "Please action details."
+      });
+    }
+  } catch (err) {
+    return res.status(400).json({
+      status: 500,
+      error: "This  information could not be modified."
+    });
+  }
+};
+
 module.exports = {
   getAllActions,
   getActionById,
-  createAction
+  createAction,
+  updateAction
 };

@@ -61,7 +61,7 @@ const updateProject = async (req, res) => {
       }
       return res.status(400).json({
         status: 400,
-        errorMessage: "Please provide project deatals."
+        errorMessage: "Please provide project detials."
       });
     }
   } catch (err) {

@@ -18,4 +18,10 @@ router.post(
   ActionControllers.createAction
 );
 
+router.put(
+  "/:id",
+  ActionHelper.validateActionId,
+  ActionControllers.updateAction
+);
+
 module.exports = router;
