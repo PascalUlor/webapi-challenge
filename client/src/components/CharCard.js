@@ -25,9 +25,8 @@ const CharCard = props => {
 
 const Card = styled.div`
   max-width: 350px;
-  height: 6rem;
+  height: 8rem;
   background-color: rgba(65, 66, 46, 0.8);
-  /* #41422e */
   margin: 1rem auto;
   line-height: 2rem;
   color: #9399a4;

@@ -14,22 +14,6 @@ function App() {
     description: ""
   });
 
-  const addChar = event => {
-    event.preventDefault();
-    let CharDeet = {
-      name: newChar.name,
-      bio: newChar.description
-    };
-    axios
-      .post(`${baseUrl}`, CharDeet)
-      .then(res => {})
-      .catch(err => console.log(err));
-    setNewChar({
-      name: "",
-      description: ""
-    });
-  };
-
   const handleInputChange = e => {
     const target = e.target;
     const value = target.value;
@@ -53,8 +37,9 @@ function App() {
     await axios
       .get(`${baseUrl}/${id}`)
       .then(res => {
-        setCurrentCharId(res.data.id);
-        const charEdit = chars.find(char => char.id === res.data.id);
+        console.log(res.data.data);
+        setCurrentCharId(res.data.data.id);
+        const charEdit = chars.find(char => char.id === res.data.data.id);
         if (charEdit) {
           setNewChar({
             name: charEdit.name,
@@ -65,6 +50,23 @@ function App() {
       .catch(err => {
         return err.statusText;
       });
+  };
+
+  const addChar = event => {
+    event.preventDefault();
+    let CharDeet = {
+      name: newChar.name,
+      description: newChar.description
+    };
+    axios
+      .post(`${baseUrl}`, CharDeet)
+      .then(res => {})
+      .catch(err => console.log(err));
+    setNewChar({
+      name: "",
+      description: ""
+    });
+    FetchChars();
   };
 
   const UpdateChar = () => {
@@ -117,7 +119,7 @@ const Main = styled.div`
   justify-content: center;
   align-items: center;
   background: linear-gradient(to top, rgba(80, 68, 18, 0.6) 10%, transparent),
-    url(https://i.pinimg.com/originals/2e/65/68/2e656825f9bf5c52bc3febdac8f43945.jpg)
+    url(https://i.pinimg.com/originals/1c/e7/e3/1ce7e363167f52d3dcf0c801f862b9c1.jpg)
       center/cover no-repeat border-box,
     skyblue;
   width: 100vw;

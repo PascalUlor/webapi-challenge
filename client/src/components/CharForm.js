@@ -5,26 +5,32 @@ const CharForm = props => {
   const { UpdateChar, addChar, handleInputChange, newChar, IsEdit } = props;
   const Method = IsEdit ? UpdateChar : addChar;
   return (
-    <Form onSubmit={Method}>
-      <input
-        type="text"
-        placeholder="Enter Name"
-        value={newChar.name}
-        onChange={handleInputChange}
-        name="name"
-      />
-      <textarea
-        type="text"
-        placeholder="Enter Bio"
-        value={newChar.bio}
-        onChange={handleInputChange}
-        name="bio"
-      />
-      <button>Submit</button>
-    </Form>
+    <Cover>
+      <Form onSubmit={Method}>
+        <input
+          type="text"
+          placeholder="Enter Name"
+          value={newChar.name}
+          onChange={handleInputChange}
+          name="name"
+        />
+        <textarea
+          type="text"
+          placeholder="Enter description"
+          value={newChar.description}
+          onChange={handleInputChange}
+          name="description"
+        />
+        <button>Submit</button>
+      </Form>
+    </Cover>
   );
 };
 
+const Cover = styled.div`
+  background-color: skyblue;
+  margin: 0 2rem;
+`;
 const Form = styled.form`
   display: flex;
   flex-direction: column;
@@ -42,7 +48,8 @@ const Form = styled.form`
     width: 15rem;
   }
   button {
-    background-color: skyblue;
+    background-color: #41422e;
+    color: #fff;
     border-radius: 8px;
     width: 5rem;
     height: 2rem;
