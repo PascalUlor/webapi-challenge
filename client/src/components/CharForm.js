@@ -2,9 +2,8 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 import ProjectContext from "../App";
 
-const CharForm = props => {
+const CharForm = () => {
   const value = useContext(ProjectContext);
-  // const { UpdateChar, addChar, handleInputChange, newChar, IsEdit } = props;
   const Method = value.IsEdit ? value.UpdateChar : value.addChar;
   return (
     <Cover>

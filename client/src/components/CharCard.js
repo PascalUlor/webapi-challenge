@@ -4,7 +4,6 @@ import ProjectContext from "../App";
 
 const CharCard = props => {
   const value = useContext(ProjectContext);
-  console.log("===========", value.chars);
   return (
     <div>
       {value.chars.map(char => {
