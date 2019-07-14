@@ -6,7 +6,9 @@ import CharForm from "./components/CharForm";
 
 const baseUrl = `http://localhost:8000/api/projects/`;
 
-function App() {
+const ProjectContext = React.createContext();
+
+export function App() {
   const [chars, setChars] = useState([]);
   const [currentCharId, setCurrentCharId] = useState(null);
   const [newChar, setNewChar] = useState({
@@ -25,7 +27,6 @@ function App() {
     axios
       .get(`${baseUrl}`)
       .then(res => {
-        console.log(res.data.data);
         setChars(res.data.data);
       })
       .catch(err => {
@@ -93,24 +94,24 @@ function App() {
   useEffect(FetchChars, []);
 
   return (
-    <>
+    <ProjectContext.Provider
+      value={{
+        chars: chars,
+        DeleteUser: DeleteUser,
+        GetCharsById: GetCharsById,
+        UpdateChar: UpdateChar,
+        addChar: addChar,
+        handleInputChange: handleInputChange,
+        newChar: newChar,
+        IsEdit: currentCharId
+      }}
+    >
       <Header> Lord Of The Rings</Header>
       <Main>
-        <CharCard
-          chars={chars}
-          DeleteUser={DeleteUser}
-          GetCharsById={GetCharsById}
-        />
-        <CharForm
-          chars={chars}
-          UpdateChar={UpdateChar}
-          addChar={addChar}
-          handleInputChange={handleInputChange}
-          newChar={newChar}
-          IsEdit={currentCharId}
-        />
+        <CharCard />
+        <CharForm />
       </Main>
-    </>
+    </ProjectContext.Provider>
   );
 }
 
@@ -136,4 +137,4 @@ const Header = styled.h1`
   font-size: 2rem;
 `;
 
-export default App;
+export default ProjectContext;

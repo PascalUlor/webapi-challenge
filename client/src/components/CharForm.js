@@ -1,24 +1,26 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
+import ProjectContext from "../App";
 
 const CharForm = props => {
-  const { UpdateChar, addChar, handleInputChange, newChar, IsEdit } = props;
-  const Method = IsEdit ? UpdateChar : addChar;
+  const value = useContext(ProjectContext);
+  // const { UpdateChar, addChar, handleInputChange, newChar, IsEdit } = props;
+  const Method = value.IsEdit ? value.UpdateChar : value.addChar;
   return (
     <Cover>
       <Form onSubmit={Method}>
         <input
           type="text"
           placeholder="Enter Name"
-          value={newChar.name}
-          onChange={handleInputChange}
+          value={value.newChar.name}
+          onChange={value.handleInputChange}
           name="name"
         />
         <textarea
           type="text"
           placeholder="Enter description"
-          value={newChar.description}
-          onChange={handleInputChange}
+          value={value.newChar.description}
+          onChange={value.handleInputChange}
           name="description"
         />
         <button>Submit</button>

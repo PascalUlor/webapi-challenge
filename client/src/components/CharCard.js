@@ -1,20 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
+import ProjectContext from "../App";
 
 const CharCard = props => {
-  const { chars, DeleteUser, GetCharsById } = props;
+  const value = useContext(ProjectContext);
+  console.log("===========", value.chars);
   return (
     <div>
-      {chars.map(char => {
+      {value.chars.map(char => {
         return (
           <Card key={char.id}>
             <p>{char.name}</p>
             <p>{char.description}</p>
             <span>
-              <button onClick={() => GetCharsById(char.id)}>Edit</button>
+              <button onClick={() => value.GetCharsById(char.id)}>Edit</button>
             </span>
             <span>
-              <button onClick={() => DeleteUser(char.id)}>Delete</button>
+              <button onClick={() => value.DeleteUser(char.id)}>Delete</button>
             </span>
           </Card>
         );
